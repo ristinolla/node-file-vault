@@ -1,0 +1,35 @@
+{
+  "name": "node-vault",
+  "version": "0.0.1",
+  "description": "Simple Ansible Playbook inspired vault",
+  "main": "vault.js",
+  "scripts": {
+    "test": "test"
+  },
+  "engine": "node >= 0.12.9",
+  "preferGlobal": true,
+  "bin": {
+    "vault": "./vault.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ristinolla/node-vault.git"
+  },
+  "keywords": [
+    "node",
+    "vault",
+    "simple",
+    "encrypt"
+  ],
+  "author": "Perttu Ristimella <perttu@pertturistimella.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ristinolla/node-vault/issues"
+  },
+  "homepage": "https://github.com/ristinolla/node-vault#readme",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "lodash": "^3.10.1",
+    "yargs": "^4.1.0"
+  }
+}
