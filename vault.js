@@ -39,35 +39,10 @@ try {
   return;
 }
 
-/**
- * Finds the pathname of the parent module's package descriptor file. If the
- * directory is undefined (the default case), then it is set to the directory
- * name of the parent module's filename. If no package.json file is found, then
- * the parent directories are recursively searched until the file is found or
- * the root directory is reached. Returns the pathname if found or null if not.
- * Ref: https://gist.github.com/fhellwig/3355047
- **/
-function findParentPkgDesc(directory) {
-    if (!directory) {
-        directory = path.dirname(module.parent.filename);
-    }
-    var file = path.resolve(directory, 'package.json');
-    if (fs.existsSync(file) && fs.statSync(file).isFile()) {
-        return file;
-    }
-    var parent = path.resolve(directory, '..');
-    if (parent === directory) {
-      throw "package.json not found.";
-    }
-    return findParentPkgDesc(parent);
-}
-
-var packageDir = path.dirname( findParentPkgDesc(CWD) );
-
 function getPassword() {
   var password;
   try {
-    password = fs.readFileSync( packageDir + "/.vault_key", 'utf8');
+    password = fs.readFileSync( CWD + "/.vault_key", 'utf8');
   } catch(err) {
     throw err;
   }
