@@ -39,10 +39,30 @@ try {
   return;
 }
 
+/**
+ * REF: https://gist.github.com/fhellwig/3355047
+ **/
+function findParentPkgDesc(directory) {
+    if (!directory) {
+        directory = path.dirname(module.parent.filename);
+    }
+    var file = path.resolve(directory, 'package.json');
+    if (fs.existsSync(file) && fs.statSync(file).isFile()) {
+        return file;
+    }
+    var parent = path.resolve(directory, '..');
+    if (parent === directory) {
+      throw "package.json not found.";
+    }
+    return findParentPkgDesc(parent);
+}
+
+var packageDir = path.dirname( findParentPkgDesc(CWD) );
+
 function getPassword() {
   var password;
   try {
-    password = fs.readFileSync( CWD + "/.vault_key", 'utf8');
+    password = fs.readFileSync( packageDir + "/.vault_key", 'utf8');
   } catch(err) {
     throw err;
   }
