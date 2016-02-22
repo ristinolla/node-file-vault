@@ -27,6 +27,7 @@ if( !filePath && typeof filePath !== "string" ) {
   console.log(errorText('[Error] No file given...'));
   return;
 }
+
 var raw_content;
 var file = path.normalize(CWD + "/" + filePath);
 
@@ -38,13 +39,10 @@ try {
   return;
 }
 
-throw errorText("[Error]") + " File is already encrypted.";
-
-
 function getPassword() {
   var password;
   try {
-    password = fs.readFileSync( "./vault_key", 'utf8');
+    password = fs.readFileSync( CWD + "/.vault_key", 'utf8');
   } catch(err) {
     throw err;
   }
@@ -73,7 +71,8 @@ function isEncryptable(raw) {
   if(arr.length !== 2){
     return true;
   } else {
-    throw "a" + errorText("[Error]") + " File is already encrypted.";
+    console.log( errorText("[Error]") + " File is already encrypted." );
+    throw "error";
   }
 }
 
@@ -81,9 +80,8 @@ function checkDecryptable(raw) {
   var arr = raw.split(prepend);
   if(arr.length !== 2){
     console.log(errorText("[Error]") + " Encryption method doesn't match.");
-    return false;
+    throw "error";
   } else {
-    console.log(arr[1]);
     return arr[1];
   }
 }
