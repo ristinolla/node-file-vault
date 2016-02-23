@@ -1,5 +1,4 @@
-
-/* jshint undef: false, unused: true */
+#! /usr/bin/env node
 'use strict';
 
 var fs = require('fs'),
