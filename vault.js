@@ -5,7 +5,6 @@
 var fs = require('fs'),
     argv = require('yargs').argv,
     crypto = require('crypto'),
-    process = require('process'),
     path = require('path'),
     chalk = require('chalk');
 
@@ -40,29 +39,28 @@ try {
 }
 
 /**
- * REF: https://gist.github.com/fhellwig/3355047
+ * Inspired: https://gist.github.com/fhellwig/3355047
  **/
-function findParentPkgDesc(directory) {
+function findVaultKey(directory) {
     if (!directory) {
         directory = path.dirname(module.parent.filename);
     }
-    var file = path.resolve(directory, 'package.json');
+    var file = path.resolve(directory, '.vault_key');
     if (fs.existsSync(file) && fs.statSync(file).isFile()) {
         return file;
     }
     var parent = path.resolve(directory, '..');
     if (parent === directory) {
-      throw "package.json not found.";
+      throw "[Error] .vault_key file not found. Place it to the project root.";
     }
-    return findParentPkgDesc(parent);
+    return findVaultKey(parent);
 }
 
-var packageDir = path.dirname( findParentPkgDesc(CWD) );
 
 function getPassword() {
   var password;
   try {
-    password = fs.readFileSync( packageDir + "/.vault_key", 'utf8');
+    password = fs.readFileSync( findVaultKey(CWD), 'utf8');
   } catch(err) {
     throw err;
   }
