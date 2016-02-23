@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+
 /* jshint undef: false, unused: true */
 'use strict';
 
