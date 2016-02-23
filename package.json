@@ -1,6 +1,6 @@
 {
   "name": "node-file-vault",
-  "version": "0.0.1",
+  "version": "0.0.1beta",
   "description": "Simple Ansible Playbook inspired vault to secure secrets.",
   "main": "vault.js",
   "scripts": {
