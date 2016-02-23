@@ -10,7 +10,7 @@ Ansible Playbook inspired simple vault
 
 ### Install
 
-  npm node-file-vault install -g
+    npm node-file-vault install -g
 
 Global is more handy, so you can use it anywhere.
 
@@ -18,7 +18,7 @@ Global is more handy, so you can use it anywhere.
 
 Add keyfile called <code>.vault_key</code> to your project file. It is searched from parent directories just like a Gulpfile or a package.json. In this key file just include random key, it is your password to files.
 
-  thisshouldbesomewhatlongkeyboardcat
+    thisshouldbesomewhatlongkeyboardcat
 
 **Be sure to gitignore .vault_key!**
 
@@ -26,10 +26,10 @@ Add keyfile called <code>.vault_key</code> to your project file. It is searched 
 
 To encrypt a file type:
 
-  vault encrypt <file>
+    vault encrypt <file>
 
 ### Decrypt
 
 To decrypt encrypted file, be sure that you have the <code>.vault_key</code> file .
 
-  vault encrypt <file>
+    vault encrypt <file>
