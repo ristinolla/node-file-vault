@@ -1,10 +1,10 @@
 # node-file-vault
 
-Ansible Playbook inspired simple vault
-
-0.0.1beta
+Ansible Playbook inspired simple vault to secure files. Handy for sharing for example environment settings in repository.
 
 # Under development still, but works in simple use.
+
+Versions < 1.0.0 are considered as Beta.
 
 ## How to use
 
