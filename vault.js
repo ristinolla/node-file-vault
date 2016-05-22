@@ -16,6 +16,13 @@ var algorithm = 'aes-256-ctr',
     filePath = argv._[1];
 
 
+function GeneralException(message) {
+   this.message = message;
+   this.name = "Error";
+}
+
+console.log("argv", argv);
+
 if(mode !== "decrypt" && mode !== "encrypt"){
   console.log(errorText('[Error] encrypt or decrypt first...') );
   return;
@@ -56,20 +63,28 @@ function findVaultKey(directory) {
 }
 
 
-function getPassword() {
+function getPasswordFromFile() {
   var password;
   try {
     password = fs.readFileSync( findVaultKey(CWD), 'utf8');
   } catch(err) {
-    throw err;
+    throw new GeneralException(err);
   }
   return password;
 }
 
 var prepend = "VAULT;0.1;aes-256-ctr;VAULT\n";
-var vaultKey = getPassword();
+var vaultKey = (argv.pass) ? argv.pass.toString() : getPasswordFromFile();
 
+console.log("vaultKey", vaultKey);
 
+/**
+* @name encrypt
+* @description encrypts a string with vaultKey
+* @author Perttu Ristimella
+* @param String - text is the string to encrypt
+* @returns {String}
+*/
 function encrypt(text){
   var cipher = crypto.createCipher(algorithm, vaultKey);
   var crypted = cipher.update(text,'utf8','hex');
@@ -77,27 +92,43 @@ function encrypt(text){
   return crypted;
 }
 
+/**
+* @name decrypt
+* @description decrypts the string in
+* @author Perttu Ristimella
+* @param String - text is the string to decrypt
+* @returns {String}
+*/
 function decrypt(text){
   var decipher = crypto.createDecipher(algorithm, vaultKey);
   var dec = decipher.update(text,'hex','utf8');
   dec += decipher.final('utf8');
   return dec;
 }
+
+/**
+* @name isEncryptable
+* @description checks if the file is already encrypted by
+               checking if the file has the VAULT prepend
+* @author Perttu Ristimella
+* @returns {Boolean}
+*/
 function isEncryptable(raw) {
   var arr = raw.split(prepend);
   if(arr.length !== 2){
     return true;
   } else {
     console.log( errorText("[Error]") + " File is already encrypted." );
-    throw "error";
+    throw new GeneralException("File is already encrpyted.");
   }
 }
+
 
 function checkDecryptable(raw) {
   var arr = raw.split(prepend);
   if(arr.length !== 2){
     console.log(errorText("[Error]") + " Encryption method doesn't match.");
-    throw "error";
+    throw new GeneralException("Encryption method doesn't match.");
   } else {
     return arr[1];
   }
