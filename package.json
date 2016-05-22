@@ -4,7 +4,7 @@
   "description": "Simple Ansible Playbook inspired vault to secure secrets.",
   "main": "vault.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha test/test.js"
   },
   "preferGlobal": true,
   "bin": {
