@@ -20,7 +20,11 @@
     "simple",
     "encrypt"
   ],
-  "author": "Perttu Ristimella <perttu@pertturistimella.com>",
+  "author": {
+    "name": "Perttu Ristimella",
+    "email": "perttu@pertturistimella.com",
+    "url": "http://pertturistiemlla.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ristinolla/node-file-vault/issues"
