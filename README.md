@@ -1,5 +1,7 @@
 # node-file-vault
 
+s
+
 [![Build Status](https://travis-ci.org/ristinolla/node-file-vault.svg?branch=master)](https://travis-ci.org/ristinolla/node-file-vault)
 
 Ansible Playbook inspired simple vault to secure files. Handy for sharing for example environment settings in repository.
